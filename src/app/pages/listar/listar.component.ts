@@ -13,7 +13,7 @@ export class ListarComponent implements OnInit {
 constructor(private pessoaService : PessoaService, private router: Router){}
 
 alterarPessoa(idPessoa?: number) {
-
+  this.router.navigate([`/editar/${idPessoa}`]);
 }
 
 deletePessoa(idPessoa: number) {

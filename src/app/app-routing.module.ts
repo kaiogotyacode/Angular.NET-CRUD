@@ -7,7 +7,7 @@ import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
   { path: "listar", component: ListarComponent},
-  { path: "editar", component: EditarComponent},
+  { path: "editar/:idPessoa", component: EditarComponent},
   { path: "cadastrar", component: CadastrarComponent},
   { path: "", component: HomeComponent},
 

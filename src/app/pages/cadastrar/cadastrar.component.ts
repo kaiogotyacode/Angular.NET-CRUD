@@ -13,7 +13,7 @@ export class CadastrarComponent implements OnInit {
 
   constructor(private pessoaService : PessoaService, private route : Router){}
   
-  @Output() onSubmit = new EventEmitter<Pessoa>();
+  // @Output() onSubmit = new EventEmitter<Pessoa>();
   
   formCadastroPessoa!: FormGroup;
   

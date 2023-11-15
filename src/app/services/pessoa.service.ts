@@ -13,6 +13,10 @@ export class PessoaService {
 
   constructor(private http : HttpClient) {}
 
+  GetPessoaByID(idPessoa? : number) : Observable<Pessoa>{
+    return this.http.get<Pessoa>(`${this.apiURL}/${idPessoa}`);
+  }
+
   GetPessoas(): Observable<Pessoa[]>{
     return this.http.get<Pessoa[]>(this.apiURL);
   }
@@ -23,6 +27,10 @@ export class PessoaService {
 
   DeletePessoa(idPessoa : Number): Observable<number>{
     return this.http.delete<number>(`${this.apiURL}/${idPessoa}`);
+  }
+
+  EditPessoa(pessoa? : Pessoa): Observable<Pessoa>{
+    return this.http.put<Pessoa>(this.apiURL, pessoa);
   }
 
 }

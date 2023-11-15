@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Pessoa } from 'src/app/models/Pessoa/Pessoa';
 import { PessoaService } from 'src/app/services/pessoa.service';
 
@@ -10,22 +11,32 @@ import { PessoaService } from 'src/app/services/pessoa.service';
 })
 export class EditarComponent implements OnInit {
 
-  @Output() onSubmit = new EventEmitter<Pessoa>();
+  // @Output() onSubmit = new EventEmitter<Pessoa>();
 
   formAtualizaPessoa!: FormGroup;
+  pessoa? : Pessoa;
 
-  constructor(private pessoaService: PessoaService) { }
-
+  constructor(private pessoaService: PessoaService, private router : Router, private route : ActivatedRoute) { }
+  
   ngOnInit(): void {
-    this.formAtualizaPessoa = new FormGroup({
-      idPessoa: new FormControl(0),
-      nome: new FormControl('Nome da Pessoa', [Validators.required]),
-      email: new FormControl('Email da Pessoa', [Validators.required, Validators.email])
+    const idPessoa = Number(this.route.snapshot.paramMap.get('idPessoa'));
+
+    this.pessoaService.GetPessoaByID(idPessoa).subscribe(x =>{
+      this.pessoa  = x;
+            
+      this.formAtualizaPessoa = new FormGroup({
+        idPessoa: new FormControl(x.idPessoa),
+        nome: new FormControl(x.nome, [Validators.required]),
+        email: new FormControl(x.email, [Validators.required, Validators.email])
+      });
     });
+    
   }
 
   EditPessoa() {
-    //this.pessoaService.alterar(this.formAtualizaPessoa.value).subscribe();
+    this.pessoaService.EditPessoa(this.formAtualizaPessoa.value).subscribe(()=>{
+      this.router.navigate(['/listar']);
+    });
   }
 
 
