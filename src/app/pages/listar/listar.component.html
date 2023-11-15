@@ -1,16 +1,28 @@
 <h1> Lista de Pessoas </h1>
 
+<button (click)="cadastrarNovo()"> Cadastrar Novo </button>
+
 <table border="1">
   <thead>
     <th>#</th>
     <th>Nome</th>
     <th>E-mail</th>
+    <th>Editar</th>
+    <th>Excluir</th>
   </thead>
-  <tbody>
+  <tbody *ngFor="let pessoa of pessoas">
     <tr>
-      <td>1</td>
-      <td>Kaio</td>
-      <td>kaio@hotmail.com</td>
+      <td>{{ pessoa.idPessoa }}</td>
+      <td>{{ pessoa.nome }}</td>
+      <td>{{ pessoa.email }}</td>
+      <td> <button (click)="alterarPessoa(pessoa.idPessoa)" style="background-color: lightblue;" > Editar </button> </td>
+      <td> <button (click)="deletePessoa(pessoa.idPessoa)" style="background-color: lightcoral;"> Excluir </button></td>
     </tr>
   </tbody>
+  <tfoot  *ngIf="pessoas.length == 0">
+    <td colspan="5">
+      <p class="text-center">Não há usuários cadastrados!</p>
+    </td>
+  </tfoot>
 </table>
+

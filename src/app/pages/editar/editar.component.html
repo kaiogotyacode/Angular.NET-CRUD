@@ -1,1 +1,14 @@
-<p>editar works!</p>
+<h1> Editar Pessoa </h1>
+
+<form [formGroup]="formAtualizaPessoa" (ngSubmit)="EditPessoa()" #formDir="ngForm">
+    <input type="hidden" formControlName="idPessoa" value="idPessoa">
+    
+    <label for="nome">Nome: </label>
+    <input formControlName="nome" id="nome" type="text" placeholder="Digite seu nome..."/>
+
+    <label for="email">E-mail:  </label>
+    <input formControlName="email" id="email" type="text" placeholder="Digite seu e-mail..."/>
+
+    <input type="submit"  [disabled]="!formAtualizaPessoa.valid" value="Editar"/>
+    <input type="button" routerLink="/listar" value="Voltar"/>
+</form>

@@ -1,1 +1,12 @@
-<p>cadastrar works!</p>
+<h1> Cadastro de Pessoa </h1>
+
+<form [formGroup]="formCadastroPessoa" (ngSubmit)="AddPessoa()" #formDir="ngForm">
+    <label for="nome">Nome: </label>
+    <input formControlName="nome" id="nome" type="text" placeholder="Digite seu nome..."/>
+
+    <label for="email">E-mail:  </label>
+    <input formControlName="email" id="email" type="text" placeholder="Digite seu e-mail..."/>
+
+    <input type="submit"  [disabled]="!formCadastroPessoa.valid" value="Cadastrar"/>
+    <input type="button" routerLink="/listar" value="Voltar"/>
+</form>
