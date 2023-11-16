@@ -2,14 +2,8 @@
 
 <button (click)="cadastrarNovo()"> Cadastrar Novo </button>
 
-<div class="paginator-show" [(ngModel)]="pagShow">
-  <label for="pag-show">Exibir:</label>
-  <select id="pag-show">
-      <option value="5"> 5</option>
-      <option value="10"> 10</option>
-      <option value="15"> 15</option>
-      <option value="20"> 20</option>
-  </select>
+<div *ngIf="totalResultado" class="paginator-show">
+  <h2> Total de {{ totalResultado }} registros!</h2>
 </div>
 
 <table border="1">
@@ -38,8 +32,23 @@
 
 <div class="paginator">
   <ul class="ul-paginator">
-    <li *ngIf="pessoas.length > 0"><a>Anterior</a></li>
-    <li *ngFor="let num of totalToArray" (click)="AtualizarLista((num-1), pagShow)"><a>{{ num }}</a></li>  
-    <li *ngIf="pessoas.length > 0"><a>Próximo</a></li>
+
+    <li *ngIf="pessoas.length > 0" [class.disabled]="page == 0" (click)="AtualizarLista((page=page-1), take)">
+      <a>Anterior</a>
+    </li>
+
+    <li *ngFor="let num of totalToArray" (click)="AtualizarLista(page=(num-1), take)">
+      <a>{{ num }}</a>
+    </li>
+
+    <li *ngIf="totalPagina! >= 7" class="disabled">
+      <a> ...</a>
+    </li>
+
+    <li *ngIf="pessoas.length > 0" [class.disabled]="page >= (totalPagina!-1)"
+      (click)="AtualizarLista((page=page+1), take)">
+      <a>Próximo</a>
+    </li>
+    
   </ul>
 </div>

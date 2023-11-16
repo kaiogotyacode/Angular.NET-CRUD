@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Pessoa } from 'src/app/models/Pessoa/Pessoa';
 import { PessoaService } from 'src/app/services/pessoa.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-listar',
@@ -14,7 +14,7 @@ import { FormsModule } from '@angular/forms';
 
 export class ListarComponent implements OnInit {
 
-constructor(private pessoaService : PessoaService, private router: Router){}
+constructor(private pessoaService : PessoaService, private router: Router, private renderer : Renderer2){}
 
 totalPagina? : number;
 totalToArray : number[] = [];
@@ -35,12 +35,13 @@ cadastrarNovo() {
 
   pessoas : Pessoa[] = [];
   page : number = 0;
-  take : number = 10;
-  pagShow!: number;
+  take : number = 10; 
+  totalResultado!: number;
 
   ngOnInit(): void {
     this.pessoaService.GetPessoas(this.page, this.take).subscribe(response => {
       this.pessoas = response.pessoas;
+      this.totalResultado = response.total!;
       this.totalPagina = Math.ceil(response.total!/this.take) ;
       for(let i = 1; i <= this.totalPagina!; i++){
         this.totalToArray.push(i);
@@ -49,8 +50,11 @@ cadastrarNovo() {
   }
 
   AtualizarLista(page: number, take: number) {
+
+
     this.pessoaService.GetPessoas(page, take).subscribe(response => {
       this.pessoas = response.pessoas;
+      this.totalResultado = response.total!;
     });
   }
 

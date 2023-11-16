@@ -2,15 +2,24 @@
     text-align: center;
 }
 
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
 .paginator{
-    display: flex;    
-    width:  100vw;
+    margin-top: 50px;
+    justify-content: center;
+    display: flex;   
+    background-color: aliceblue; 
+    width:  50vw;
 }
 
 .ul-paginator{    
+    overflow: hidden !important;
     display: flex;
     justify-content: space-around;
-    width: 250px;
+    width: auto;
     list-style: none;
 }
 
@@ -27,4 +36,14 @@
 .paginator-show{
     padding-top: 25px;
     padding-bottom: 25px;
+}
+
+
+li.disabled{
+    opacity: 0.5;
+    pointer-events: none;    
+}
+
+.active{
+    background-color: deepskyblue;
 }
