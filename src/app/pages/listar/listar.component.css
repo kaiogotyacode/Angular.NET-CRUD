@@ -1,3 +1,30 @@
 .text-center{
     text-align: center;
 }
+
+.paginator{
+    display: flex;    
+    width:  100vw;
+}
+
+.ul-paginator{    
+    display: flex;
+    justify-content: space-around;
+    width: 250px;
+    list-style: none;
+}
+
+.ul-paginator li{
+    border: 1px solid #000;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.ul-paginator li a{
+    text-align: center;
+}
+
+.paginator-show{
+    padding-top: 25px;
+    padding-bottom: 25px;
+}

@@ -10,9 +10,7 @@ import { PessoaService } from 'src/app/services/pessoa.service';
   styleUrls: ['./editar.component.css']
 })
 export class EditarComponent implements OnInit {
-
-  // @Output() onSubmit = new EventEmitter<Pessoa>();
-
+ 
   formAtualizaPessoa!: FormGroup;
   pessoa? : Pessoa;
 

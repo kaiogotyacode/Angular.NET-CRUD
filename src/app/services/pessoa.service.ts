@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Pessoa } from '../models/Pessoa/Pessoa';
 import { environment } from 'src/environments/environment.development';
+import { ResponsePessoa } from '../models/ResponsePessoa';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,8 @@ export class PessoaService {
     return this.http.get<Pessoa>(`${this.apiURL}/${idPessoa}`);
   }
 
-  GetPessoas(): Observable<Pessoa[]>{
-    return this.http.get<Pessoa[]>(this.apiURL);
+  GetPessoas(page : number, take : number): Observable<ResponsePessoa<Pessoa[]>>{
+    return this.http.get<ResponsePessoa<Pessoa[]>>(`${this.apiURL}?page=${page}&take=${take}`);
   }
 
   AddPessoa(pessoa? : Pessoa): Observable<Pessoa>{

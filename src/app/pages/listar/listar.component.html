@@ -2,6 +2,16 @@
 
 <button (click)="cadastrarNovo()"> Cadastrar Novo </button>
 
+<div class="paginator-show" [(ngModel)]="pagShow">
+  <label for="pag-show">Exibir:</label>
+  <select id="pag-show">
+      <option value="5"> 5</option>
+      <option value="10"> 10</option>
+      <option value="15"> 15</option>
+      <option value="20"> 20</option>
+  </select>
+</div>
+
 <table border="1">
   <thead>
     <th>#</th>
@@ -15,14 +25,21 @@
       <td>{{ pessoa.idPessoa }}</td>
       <td>{{ pessoa.nome }}</td>
       <td>{{ pessoa.email }}</td>
-      <td> <button (click)="alterarPessoa(pessoa.idPessoa)" style="background-color: lightblue;" > Editar </button> </td>
+      <td> <button (click)="alterarPessoa(pessoa.idPessoa)" style="background-color: lightblue;"> Editar </button> </td>
       <td> <button (click)="deletePessoa(pessoa.idPessoa)" style="background-color: lightcoral;"> Excluir </button></td>
     </tr>
   </tbody>
-  <tfoot  *ngIf="pessoas.length == 0">
+  <tfoot *ngIf="pessoas.length == 0">
     <td colspan="5">
       <p class="text-center">Não há usuários cadastrados!</p>
     </td>
   </tfoot>
 </table>
 
+<div class="paginator">
+  <ul class="ul-paginator">
+    <li *ngIf="pessoas.length > 0"><a>Anterior</a></li>
+    <li *ngFor="let num of totalToArray" (click)="AtualizarLista((num-1), pagShow)"><a>{{ num }}</a></li>  
+    <li *ngIf="pessoas.length > 0"><a>Próximo</a></li>
+  </ul>
+</div>
